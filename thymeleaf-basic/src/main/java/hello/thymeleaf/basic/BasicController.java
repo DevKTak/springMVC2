@@ -30,6 +30,19 @@ public class BasicController {
         return "basic/text-unescaped";
     }
 
+    @GetMapping("/basic-objects")
+    public String basicObjects(HttpSession session) {
+        session.setAttribute("sessionData", "Hello Session");
+        return "basic/basic-objects";
+    }
+
+    @Component("helloBean")
+    static class HelloBean { // 컴포넌트 스캔 대상이 되어서 스프링 빈으로 등록이 됨
+        public String hello(String data) {
+            return "Hello " + data;
+        }
+    }
+
     @GetMapping("/variable")
     public String variable(Model model) {
         User userA = new User("userA", 10);
