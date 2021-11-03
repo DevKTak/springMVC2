@@ -25,11 +25,12 @@ public class LoginMemberArgumentResolver implements HandlerMethodArgumentResolve
   }
 
   @Override
-  public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+  public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest,
+                                WebDataBinderFactory binderFactory) throws Exception {
     log.info("resolveArgument 실행");
 
     HttpServletRequest request = (HttpServletRequest) webRequest.getNativeRequest();
-    HttpSession session = request.getSession(false); // 불필요한 세션의 생성을 막기위해 false
+    HttpSession session = request.getSession(false); // 의미없는 세션 생성 방지 false
 
     if (session == null) {
       return null;
