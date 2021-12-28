@@ -1,7 +1,7 @@
 package hello.upload.controller;
 
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +17,7 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/spring")
 public class SpringUploadController {
+
     @Value("${file.dir}")
     private String fileDir;
 
@@ -27,17 +28,18 @@ public class SpringUploadController {
 
     @PostMapping("/upload")
     public String saveFile(@RequestParam String itemName,
-                           @RequestParam MultipartFile file, HttpServletRequest
-                                   request) throws IOException {
+                           @RequestParam MultipartFile file, HttpServletRequest request) throws IOException {
+
         log.info("request={}", request);
         log.info("itemName={}", itemName);
         log.info("multipartFile={}", file);
+
         if (!file.isEmpty()) {
             String fullPath = fileDir + file.getOriginalFilename();
             log.info("파일 저장 fullPath={}", fullPath);
             file.transferTo(new File(fullPath));
         }
+
         return "upload-form";
     }
 }
-
