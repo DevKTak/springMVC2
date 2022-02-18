@@ -18,28 +18,28 @@ import java.io.IOException;
 @RequestMapping("/spring")
 public class SpringUploadController {
 
-  @Value("${file.dir}")
-  private String fileDir;
+    @Value("${file.dir}")
+    private String fileDir;
 
-  @GetMapping("/upload")
-  public String newFile() {
-    return "upload-form";
-  }
-
-  @PostMapping("/upload")
-  public String saveFile(@RequestParam String itemName,
-                         @RequestParam MultipartFile file, HttpServletRequest request) throws IOException {
-
-    log.info("request={}", request);
-    log.info("itemName={}", itemName);
-    log.info("multipartFile={}", file);
-
-    if (!file.isEmpty()) {
-      String fullPath = fileDir + file.getOriginalFilename();
-      log.info("파일 저장 fullPath={}", fullPath);
-      file.transferTo(new File(fullPath));
+    @GetMapping("/upload")
+    public String newFile() {
+        return "upload-form";
     }
 
-    return "upload-form";
-  }
+    @PostMapping("/upload")
+    public String saveFile(@RequestParam String itemName,
+                           @RequestParam MultipartFile file, HttpServletRequest request) throws IOException {
+
+        log.info("request={}", request);
+        log.info("itemName={}", itemName);
+        log.info("multipartFile={}", file);
+
+        if (!file.isEmpty()) {
+            String fullPath = fileDir + file.getOriginalFilename();
+            log.info("파일 저장 fullPath={}", fullPath);
+            file.transferTo(new File(fullPath));
+        }
+
+        return "upload-form";
+    }
 }
