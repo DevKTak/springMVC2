@@ -34,5 +34,4 @@ public class ApiExceptionV3Controller {
         private String memberId;
         private String name;
     }
-
 }
